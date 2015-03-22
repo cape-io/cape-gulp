@@ -26,7 +26,6 @@
     "coffee-react": "3.x",
     "coffee-reactify": "2.x",
     "exorcist": "*",
-    "gulp": "3.x",
     "gulp-clean": "x",
     "gulp-debug": "1.x",
     "gulp-less": "*",
@@ -45,6 +44,7 @@
     "vinyl-source-stream": "1.x",
     "vinyl-transform": "1.x",
     "watchify": "2.x",
-    "wreck": "5.x"
+    "wreck": "5.x",
+    "catbox-redis": "^1.0.4"
   }
 }
