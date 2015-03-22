@@ -18,6 +18,7 @@ browserSync = require 'browser-sync'
 browserify = require 'browserify'
 exorcist = require 'exorcist'
 watchify = require 'watchify'
+cjsx = require 'coffee-reactify'
 
 # Database
 redis = require 'redis'
@@ -43,6 +44,7 @@ opts = watchify.args
 opts.extensions = ['.coffee', '.cjsx']
 opts.debug = true
 w = watchify browserify('./app/app.cjsx', opts)
+w.transform(cjsx)
 
 gulp.task 'bundle', ->
   # Remove the sorted set (from Redis) that contains all valid compiled routes.
@@ -89,6 +91,7 @@ gulp.task 'prod', ['prod_clean'], (cb) ->
 gulp.task 'compile', ->
   browserified = transform (filename) ->
     b = browserify {debug: true, extensions: ['.cjsx', '.coffee']}
+    b.transform(cjsx)
     b.add filename
     #b.transform 'coffee-reactify'
     b.bundle()

@@ -14,7 +14,7 @@ redClient = redis.createClient()
 
 siteId = argv.host
 
-App = require '../app/app'
+App = require '../../app/app'
 
 REDKEYh = 'rjsRoute.h.'+siteId
 REDKEYz = 'rjsRoute.z.'+siteId
