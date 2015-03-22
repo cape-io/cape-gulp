@@ -64,7 +64,7 @@ w.on 'update', () ->
 
 gulp.task 'compile-watch', (cb) ->
   # Start static file server. localhost:8088
-  require 'cape-react-server'
+  require './server'
   runSequence 'bundle', cb
   return
 # /WATCHIFY

@@ -24,6 +24,7 @@
     "browser-sync": "1.x",
     "browserify": "8.x",
     "cape-gulp": "git+https://github.com/cape-io/cape-react-server.git",
+    "coffee-react": "3.x",
     "coffee-reactify": "2.x",
     "exorcist": "*",
     "gulp": "3.x",
@@ -35,11 +36,16 @@
     "gulp-uglify": "1.x",
     "gulp-util": "3.x",
     "gulp-zopfli": "*",
+    "hapi": "8.x",
+    "lodash": "3.x",
+    "minimist": "1.x",
+    "react": "0.13.x",
     "redis": "*",
     "run-sequence": "1.x",
     "vinyl-buffer": "1.x",
     "vinyl-source-stream": "1.x",
     "vinyl-transform": "1.x",
-    "watchify": "2.x"
+    "watchify": "2.x",
+    "wreck": "5.x"
   }
 }
