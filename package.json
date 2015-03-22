@@ -1,0 +1,31 @@
+{
+  "name": "cape-gulp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "1.x",
+    "browserify": "8.x",
+    "exorcist": "*",
+    "gulp": "3.x",
+    "gulp-clean": "x",
+    "gulp-debug": "1.x",
+    "gulp-less": "*",
+    "gulp-rename": "1.x",
+    "gulp-sourcemaps": "1.x",
+    "gulp-uglify": "1.x",
+    "gulp-util": "3.x",
+    "gulp-zopfli": "*",
+    "redis": "*",
+    "run-sequence": "1.x",
+    "vinyl-buffer": "1.x",
+    "vinyl-source-stream": "1.x",
+    "vinyl-transform": "1.x",
+    "watchify": "2.x"
+  }
+}
