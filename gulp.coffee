@@ -22,7 +22,7 @@ watchify = require 'watchify'
 # Database
 redis = require 'redis'
 
-SITE_ID = 'something'
+{SITE_ID} = global
 
 # Default gulp tasks watches files for changes
 gulp.task "default", ['browser-sync'], ->
