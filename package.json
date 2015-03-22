@@ -23,6 +23,7 @@
   "dependencies": {
     "browser-sync": "1.x",
     "browserify": "8.x",
+    "cape-gulp": "git+https://github.com/cape-io/cape-react-server.git",
     "coffee-reactify": "2.x",
     "exorcist": "*",
     "gulp": "3.x",
