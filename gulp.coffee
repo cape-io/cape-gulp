@@ -89,11 +89,10 @@ gulp.task 'prod', ['prod_clean'], (cb) ->
 
 # This generates the js app file.
 gulp.task 'compile', ->
+  b = browserify {debug: true, extensions: ['.cjsx', '.coffee']}
+  b.transform cjsx
   browserified = transform (filename) ->
-    b = browserify {debug: true, extensions: ['.cjsx', '.coffee']}
-    b.transform(cjsx)
     b.add filename
-    #b.transform 'coffee-reactify'
     b.bundle()
   gulp.src 'app/app.cjsx'
     .pipe browserified
@@ -128,17 +127,6 @@ gulp.task 'prod_clean', ->
 gulp.task 'prod_static', ->
   gulp.src('./static/**')
     .pipe gulp.dest('./prod/')
-
-gulp.task 'cssProd', ->
-  runSequence ['copy_css', 'templatesProd']
-  return
-
-gulp.task 'copy_css', ['styles'], ->
-  gulp.src('./dev/app.css')
-    .pipe(rename(global.sha+'.css'))
-    .pipe(gulp.dest('./prod'))
-  gulp.src('./dev/print.css')
-    .pipe(gulp.dest('./prod'))
 
 gulp.task 'compress', ->
   gulp.src("./prod/*.{js,css,html,json}")
