@@ -1,3 +1,4 @@
+fs = require 'fs-extra'
 # Gulp Utils
 gulp = require 'gulp'
 clean = require 'gulp-clean'
@@ -47,6 +48,7 @@ w = watchify browserify('./app/app.cjsx', opts)
 w.transform(cjsx)
 
 gulp.task 'bundle', ->
+  fs.mkdirsSync './public/assets'
   # Remove the sorted set (from Redis) that contains all valid compiled routes.
   red = redis.createClient()
   red.del 'rjsRoute.h.'+SITE_ID, (err, res) ->
@@ -89,6 +91,7 @@ gulp.task 'prod', ['prod_clean'], (cb) ->
 
 # This generates the js app file.
 gulp.task 'compile', ->
+  fs.mkdirsSync './public/assets'
   b = browserify {debug: true, extensions: ['.cjsx', '.coffee']}
   b.transform cjsx
   browserified = transform (filename) ->

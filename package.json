@@ -29,6 +29,7 @@
     "exorcist": "*",
     "good": "^5.1.2",
     "good-console": "^4.1.0",
+    "fs-extra": "*",
     "gulp-clean": "x",
     "gulp-debug": "1.x",
     "gulp-less": "*",
