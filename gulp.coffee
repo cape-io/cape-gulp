@@ -24,7 +24,7 @@ cjsx = require 'coffee-reactify'
 # Database
 redis = require 'redis'
 
-{SITE_ID} = global
+{SITE_ID, DEV_URL} = global
 
 # Default gulp tasks watches files for changes
 gulp.task "default", ['browser-sync'], ->
@@ -35,7 +35,7 @@ gulp.task "default", ['browser-sync'], ->
 # For development.
 gulp.task "browser-sync", ['compile-watch', 'styles', 'static'], ->
   browserSync
-    proxy: "localhost:8088"
+    proxy: if DEV_URL then DEV_URL else "localhost:8088"
     logConnections: true
     injectChanges: true
   return
