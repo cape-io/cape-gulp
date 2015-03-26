@@ -108,7 +108,7 @@ gulp.task 'compile', ->
     .pipe gulp.dest('./public/assets')
   # Remove the sorted set (from Redis) that contains all valid compiled routes.
   red = redis.createClient()
-  red.del 'rjsRoute.h.mica', (err, res) ->
+  red.del 'rjsRoute.h.'+SITE_ID, (err, res) ->
     console.log 'expireHtml', err, res
     red.end()
 
