@@ -1,4 +1,9 @@
 fs = require 'fs-extra'
+
+redis = require 'redis'
+Wreck = require 'wreck'
+_ = require 'lodash'
+
 # Gulp Utils
 gulp = require 'gulp'
 clean = require 'gulp-clean'
@@ -20,9 +25,6 @@ browserify = require 'browserify'
 exorcist = require 'exorcist'
 watchify = require 'watchify'
 cjsx = require 'coffee-reactify'
-
-# Database
-redis = require 'redis'
 
 {SITE_ID, DEV_URL} = global
 
@@ -106,11 +108,17 @@ gulp.task 'compile', ->
     # Rename the file.
     .pipe rename('app.js')
     .pipe gulp.dest('./public/assets')
-  # Remove the sorted set (from Redis) that contains all valid compiled routes.
-  red = redis.createClient()
-  red.del 'rjsRoute.h.'+SITE_ID, (err, res) ->
-    console.log 'expireHtml', err, res
-    red.end()
+  # Remove the Redis hash of renders for every site using this theme.
+  Wreck.get 'http://rjs.cape.io/'+SITE_ID, {json: true}, (err, resp, payload) ->
+    if _.isArray payload
+      red = redis.createClient()
+      multi = red.multi()
+      _.each payload, (siteId) ->
+        multi.del 'rjsRoute.h.'+siteId
+        #console.log 'expireHtml', siteId
+      multi.exec (err, res) ->
+        console.log 'expireHtml', payload, err, res
+        red.end()
 
 # Remove contents from public directory.
 gulp.task 'prod_clean', ->
