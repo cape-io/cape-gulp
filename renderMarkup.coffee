@@ -31,11 +31,19 @@ render = (Handler, props) ->
     throw err if err
   console.log 'ok'
 
+onError = (err) ->
+  console.error err
+  redClient.quit()
+
+onAbort = (abortReason) ->
+  console.log JSON.stringify(abortReason)
+  redClient.quit()
+
 handleDataRes = (data) ->
   data.path = argv.path
   data._dataId = siteId
   # Trigger render.
-  App data, render
+  App data, render, onError, onAbort
 
 # data = encodeURIComponent(encodeURIComponent(config))
 redCacheId = "hapi-cache:%23serverData:"+siteId

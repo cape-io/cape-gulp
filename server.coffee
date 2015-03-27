@@ -80,7 +80,13 @@ server.route
           console.error err
           return reply err or stderr
         else
-          console.log(stdout) if stdout
+          unless stdout is "ok\n"
+            try
+              info = JSON.parse(stdout)
+              if info?.to
+                return reply.redirect info.to
+            catch
+              console.log stdout
           redClient.hget 'rjsRoute.h.'+SITE_ID, p, (err, res) ->
             if err then return reply err
             return reply res
