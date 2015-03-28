@@ -65,17 +65,16 @@ server.route
   method: 'GET'
   path: '/{path*}'
   handler: (req, reply) ->
-    p = req.params.path or ''
+    p = req.url.path
     if path.extname(p)
       return reply.file("public/#{p}")
-    p = '/' + p
 
     redClient.hget 'rjsRoute.h.'+SITE_ID, p, (err, res) ->
       if err then return reply err
       if res then return reply res
       console.log SITE_ID, p, 'not in redis'
       scriptPath = path.resolve(__dirname, 'renderMarkup.coffee')
-      exec "coffee #{scriptPath} --path=#{p} --host=#{SITE_ID}", (err, stdout, stderr) ->
+      exec "coffee #{scriptPath} --path='#{p}' --host=#{SITE_ID}", (err, stdout, stderr) ->
         if err or stderr
           console.error err
           return reply err or stderr
